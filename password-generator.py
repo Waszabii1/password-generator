@@ -3,45 +3,54 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
-letters = ["a", "b", "c", "d", "e", "f", "g",
-           "h", "i", "j", "k", "l", "m", "n",
-           "o", "p", "q", "r", "s", "t", "u"
-           "v", "w", "x", "y", "z"]
-numbers = ["0", "1", "2", "3", "4",
-           "5", "6", "7", "8", "9"]
-special = ["!", "@", "£", "$", "%", "^", "&",
-           "*", "(", ")", "-", "=", "+", "-",
-           "{", "}", "[", "]", ":", ";", "€",
-           "|", "<", ">", "?", "/", "#", "."]
+letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+           "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+special = ["!", "@", "£", "$", "%", "^", "&", "*", "(", ")", "-", "=", "+", "-",
+           "{", "}", "[", "]", ":", ";", "€", "|", "<", ">", "?", "/", "#", "."]
 
-def weak():
-    print("How long do you want your password to be? ")
-    length = int(input())
+def main():
+    print("Weak = Just letters \nMedium = Letters & Numbers \nStrong = Letters, Numbers & Special chars \nVery Strong = Letters, Numbers, Special chars & random capitalisation")
+    while True:
+        print("Type 'Weak', 'Medium', 'Strong' or 'VeryStrong' to get different strength passwords")
+        pick = input().lower().replace(" ", "")
+        length = int(input("How many characyers do you want the password to be? "))
+        if pick == "weak":
+            weak(length)
+            break
+        elif pick == "medium":
+            medium(length)
+            break
+        elif pick == "strong":
+            strong(length)
+            break
+        elif pick == "verystrong":
+            verystrong(length)
+            break
+        else:
+            print("Invalid input, try again")
+            continue
+
+def weak(length):
     password = random.choices(letters, k=length)
     print("Your password is: " + Fore.RED + "".join(password))
     
-def medium():
+def medium(length):
     choices = [letters, numbers]
-    print("How long do you want your password to be?")
-    length = int(input())
     password = ""
     for i in range(length):
         password += str(random.choice(random.choices(choices, weights=map(len, choices))[0]))
     print("Your password is: " + Fore.RED + "".join(password))
 
-def strong():
+def strong(length):
     choices = [letters, numbers, special]
-    print("How long do you want your password to be?")
-    length = int(input())
     password = ""
     for i in range(length):
         password += str(random.choice(random.choices(choices, weights=map(len, choices))[0]))
     print("Your password is: " + Fore.RED + "".join(password))
     
-def verystrong():
+def verystrong(length):
     choices = [letters, numbers, special]
-    print("How long do you want your password to be?")
-    length = int(input())
     password = ""
     for i in range(length):
         password += str(random.choice(random.choices(choices, weights=map(len, choices))[0]))
@@ -49,27 +58,4 @@ def verystrong():
     print("Your password is: " + Fore.RED + "".join(password))
 
 if __name__ == "__main__":
-    print("Weak = Just letters \nMedium = Letters & Numbers \nStrong = Letters, Numbers & Special chars \nVery Strong = Letters, Numbers, Special chars & random capitalisation")
-    while True:
-        print("Type 'weak', 'medium', 'strong' or 'verystrong' to get different strength passwords")
-        pick = input().lower()
-        if pick == "weak":
-            weak()
-            break
-        elif pick == "medium":
-            medium()
-            break
-        elif pick == "strong":
-            strong()
-            break
-        elif pick == "verystrong":
-            verystrong()
-            break
-        elif pick != "weak" or "medium" or "strong":
-            print("Invalid input, try again")
-            continue
- 
-        
-        
-
-    
+    main()
