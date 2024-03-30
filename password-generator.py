@@ -14,7 +14,7 @@ def main():
     while True:
         print("Type 'Weak', 'Medium', 'Strong' or 'VeryStrong' to get different strength passwords")
         pick = input().lower().replace(" ", "")
-        length = int(input("How many characyers do you want the password to be? "))
+        length = int(input("How many characters do you want the password to be? "))
         if pick == "weak":
             weak(length)
             break
